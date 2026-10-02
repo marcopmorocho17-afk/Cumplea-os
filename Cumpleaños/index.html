@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#fff8ed">
+	<meta name="description" content="Una sorpresa de cumpleaños hecha con mucho cariño para Evelyn.">
+	<title>Feliz cumpleaños, Evelyn</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600,30,1;9..144,700,30,1&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: light;
+			--paper: #fff8ed;
+			--ink: #25221f;
+			--pink: #f05b78;
+			--orange: #ff9a50;
+			--blue: #5272d9;
+			--green: #b9d764;
+			--serif: "Fraunces", Georgia, serif;
+			--sans: "DM Sans", "Trebuchet MS", sans-serif;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			background-color: var(--paper);
+			background-image: radial-gradient(#ebdcca 0.7px, transparent 0.7px);
+			background-size: 19px 19px;
+			color: var(--ink);
+			font-family: var(--sans);
+		}
+
+		.page { width: min(1180px, calc(100% - 64px)); margin: 0 auto; }
+
+		header {
+			height: 84px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 1px solid #25221f24;
+		}
+
+		.wordmark { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; }
+		.wordmark span { color: var(--pink); }
+		.edition { font-size: 11px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
+
+		main {
+			min-height: calc(100vh - 132px);
+			display: grid;
+			grid-template-columns: 1fr 0.92fr;
+			align-items: center;
+			gap: clamp(48px, 8vw, 112px);
+			padding: 48px 0 64px;
+		}
+
+		.copy { position: relative; z-index: 1; padding: 12px 0; }
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 9px;
+			margin: 0 0 25px;
+			color: #625b52;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+		}
+		.eyebrow::before { width: 24px; height: 2px; background: var(--pink); content: ""; }
+
+		h1 {
+			max-width: 590px;
+			margin: 0;
+			font-family: var(--serif);
+			font-size: clamp(54px, 7vw, 88px);
+			font-weight: 600;
+			line-height: 0.99;
+		}
+
+		h1 .name { display: block; color: var(--pink); font-style: italic; }
+		.intro { max-width: 395px; margin: 24px 0 29px; color: #655f59; font-size: 15px; line-height: 1.75; }
+
+		.surprise-button {
+			min-height: 54px;
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			border: 0;
+			border-radius: 3px;
+			padding: 0 21px;
+			background: var(--ink);
+			color: white;
+			font: 700 13px var(--sans);
+			cursor: pointer;
+			transition: transform 180ms ease, background 180ms ease;
+		}
+		.surprise-button:hover { transform: translateY(-2px); background: var(--pink); }
+		.surprise-button:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+		.surprise-button svg { width: 17px; height: 17px; }
+
+		.message {
+			max-width: 410px;
+			margin-top: 23px;
+			padding: 17px 19px;
+			border-left: 3px solid var(--orange);
+			background: #fffdf7;
+			font-family: var(--serif);
+			font-size: 18px;
+			line-height: 1.5;
+			animation: arrive 350ms ease both;
+		}
+		.message[hidden] { display: none; }
+		.message small { display: block; margin-top: 10px; color: #746a60; font: 600 11px var(--sans); }
+		.gummy-note {
+			display: flex;
+			align-items: center;
+			gap: 13px;
+			max-width: 395px;
+			margin: 0 0 24px;
+			padding: 12px 14px;
+			border-left: 3px solid var(--pink);
+			background: #fffdf7;
+		}
+		.gummy-note .candy { font-size: 25px; line-height: 1; }
+		.gummy-note p { margin: 0; color: #655f59; font-size: 12px; line-height: 1.45; }
+		.gummy-note strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+		.photo-wrap { position: relative; width: 100%; max-width: 465px; justify-self: end; }
+		.photo {
+			display: block;
+			width: 100%;
+			aspect-ratio: 0.83;
+			object-fit: cover;
+			border-radius: 48% 48% 4px 4px;
+			background: #f3c35f;
+			box-shadow: 17px 17px 0 var(--green);
+		}
+		.sticker {
+			position: absolute;
+			top: 12%;
+			left: -42px;
+			width: 93px;
+			aspect-ratio: 1;
+			display: grid;
+			place-items: center;
+			border-radius: 50%;
+			background: var(--blue);
+			color: white;
+			font-family: var(--serif);
+			font-size: 17px;
+			line-height: 1.05;
+			text-align: center;
+			transform: rotate(-10deg);
+		}
+		.photo-caption { margin: 25px 0 0; color: #655f59; font-size: 11px; letter-spacing: 0.12em; text-align: right; text-transform: uppercase; }
+		.birthday-challenge {
+			display: grid;
+			grid-template-columns: 0.8fr 1.2fr auto;
+			align-items: center;
+			gap: 24px;
+			margin: 0 0 30px;
+			padding: 22px 0;
+			border-top: 1px solid #25221f24;
+			border-bottom: 1px solid #25221f24;
+		}
+		.challenge-title { margin: 0; font: 600 25px/1.1 var(--serif); }
+		.challenge-label { margin: 0 0 7px; color: var(--pink); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+		.challenge-prompt { margin: 0; color: #655f59; font-size: 13px; line-height: 1.55; }
+		.birthday-challenge .surprise-button { min-height: 46px; padding: 0 16px; white-space: nowrap; }
+		.birthday-menu { padding: 6px 0 30px; }
+		.menu-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 17px; }
+		.menu-heading .challenge-label { margin-bottom: 0; }
+		.menu-title { margin: 0; font: 600 25px/1.1 var(--serif); }
+		.menu-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #25221f24; border-bottom: 1px solid #25221f24; }
+		.menu-item { min-height: 112px; padding: 18px 20px; border-left: 2px solid var(--orange); }
+		.menu-item:nth-child(2) { border-left-color: var(--pink); }
+		.menu-item:nth-child(3) { border-left-color: var(--blue); }
+		.menu-item + .menu-item { border-left-width: 1px; }
+		.menu-item:nth-child(2) { border-left-width: 2px; }
+		.menu-item h3 { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+		.menu-item p { max-width: 250px; margin: 0; color: #655f59; font-size: 13px; line-height: 1.5; }
+		.birthday-wheel { padding: 8px 0 32px; border-top: 1px solid #25221f24; }
+		.wheel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+		.wheel-title { margin: 0; font: 600 25px/1.1 var(--serif); }
+		.wheel-content { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px; }
+		.combo-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		.combo-slot { min-width: 0; padding: 8px 16px; border-left: 2px solid var(--orange); }
+		.combo-slot:nth-child(2) { border-left-color: var(--pink); }
+		.combo-slot:nth-child(3) { border-left-color: var(--blue); }
+		.combo-slot span { display: block; margin-bottom: 6px; color: #766e65; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+		.combo-slot strong { display: block; font: 600 17px/1.25 var(--serif); }
+		.combo-slot strong.is-spinning { animation: combo-pop 350ms ease-out; }
+		.wheel-content .surprise-button { min-height: 46px; padding: 0 16px; white-space: nowrap; }
+
+		footer {
+			min-height: 48px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			color: #766e65;
+			font-size: 11px;
+		}
+		.sparkle { color: var(--pink); font-size: 17px; }
+
+		.confetti {
+			position: fixed;
+			z-index: 5;
+			top: -14px;
+			width: 9px;
+			height: 13px;
+			pointer-events: none;
+			animation: fall 2.5s ease-in forwards;
+		}
+		.balloon-rail { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
+		.side-balloon {
+			position: fixed;
+			top: var(--balloon-top);
+			left: max(4px, calc(50vw - 674px));
+			width: clamp(22px, calc(25vw - 284px), 34px);
+			aspect-ratio: 0.72;
+			border: 0;
+			border-radius: 0;
+			padding: 0;
+			background: transparent;
+			cursor: pointer;
+			pointer-events: auto;
+		}
+		.balloon-visual {
+			position: absolute;
+			inset: 0;
+			border-radius: 50% 50% 46% 46%;
+			background: var(--balloon-color);
+			box-shadow: inset -5px -3px 0 #25221f12, inset 5px 4px 0 #ffffff55, 0 2px 4px #25221f20;
+			pointer-events: none;
+			animation: balloon-float var(--balloon-speed, 3s) ease-in-out var(--balloon-delay, 0s) infinite alternate;
+		}
+		.side-balloon.right { right: max(4px, calc(50vw - 674px)); left: auto; }
+		.balloon-visual::before {
+			position: absolute;
+			top: 16%;
+			left: 23%;
+			width: 15%;
+			height: 24%;
+			border-radius: 50%;
+			background: #ffffff88;
+			content: "";
+			transform: rotate(25deg);
+		}
+		.balloon-visual::after {
+			position: absolute;
+			top: 97%;
+			left: 50%;
+			width: 7px;
+			height: 7px;
+			background: var(--balloon-color);
+			clip-path: polygon(0 0, 100% 0, 50% 100%);
+			transform: translateX(-50%);
+		}
+		.balloon-string {
+			position: absolute;
+			top: 102%;
+			left: 50%;
+			height: clamp(13px, 2vh, 22px);
+			border-left: 1px solid #766e65;
+			transform: rotate(-8deg);
+		}
+		.side-balloon:hover .balloon-visual { filter: brightness(1.06); }
+		.side-balloon:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+		.side-balloon.is-popped { pointer-events: none; }
+		.side-balloon.is-popped .balloon-visual { animation: balloon-pop 260ms ease-out forwards; }
+		.pop-piece {
+			position: fixed;
+			z-index: 4;
+			width: 7px;
+			height: 7px;
+			background: var(--piece-color);
+			pointer-events: none;
+			animation: pop-spark 700ms ease-out forwards;
+		}
+		.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+		@keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes fall { to { transform: translateY(110vh) rotate(680deg); opacity: 0; } }
+		@keyframes balloon-float { to { transform: translateY(-11px) rotate(5deg); } }
+		@keyframes balloon-pop { to { opacity: 0; transform: scale(1.7); } }
+		@keyframes pop-spark { to { opacity: 0; transform: translate(var(--piece-x), var(--piece-y)) rotate(180deg) scale(0.3); } }
+		@keyframes combo-pop { 50% { opacity: 0.35; transform: translateY(5px); } }
+
+		@media (max-width: 760px) {
+			.page { width: min(100% - 40px, 520px); }
+			header { height: 68px; }
+			.edition { font-size: 9px; }
+			main { min-height: auto; grid-template-columns: 1fr; gap: 42px; padding: 51px 0 44px; }
+			h1 { font-size: clamp(55px, 13vw, 76px); }
+			.intro { margin-top: 19px; }
+			.photo-wrap { width: min(84%, 360px); justify-self: center; }
+			.sticker { left: -30px; width: 78px; font-size: 15px; }
+			.photo-caption { margin-top: 19px; }
+			.birthday-challenge { grid-template-columns: 1fr; gap: 12px; padding: 19px 0; }
+			.challenge-title { font-size: 23px; }
+			.birthday-challenge .surprise-button { justify-self: start; }
+			.menu-heading { align-items: flex-start; flex-direction: column; gap: 7px; }
+			.menu-items { grid-template-columns: 1fr; }
+			.menu-item { min-height: auto; padding: 14px 14px; }
+			.wheel-heading { align-items: flex-start; flex-direction: column; gap: 7px; }
+			.wheel-content { grid-template-columns: 1fr; gap: 14px; }
+			.combo-slots { grid-template-columns: 1fr; gap: 10px; }
+			.combo-slot { padding: 6px 12px; }
+			.wheel-content .surprise-button { justify-self: start; }
+			.side-balloon { left: 2px; width: 16px; }
+			.side-balloon.right { right: 2px; left: auto; }
+			footer { padding-bottom: 12px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<aside class="balloon-rail" aria-label="Globos interactivos de cumpleaños">
+		<button class="side-balloon" type="button" style="--balloon-color:#f05b78;--balloon-top:17vh;--balloon-delay:-.8s" aria-label="Revienta el globo rosa"><span class="balloon-visual" aria-hidden="true"><span class="balloon-string"></span></span></button>
+		<button class="side-balloon" type="button" style="--balloon-color:#ff9a50;--balloon-top:48vh;--balloon-delay:-1.7s;--balloon-speed:3.6s" aria-label="Revienta el globo naranja"><span class="balloon-visual" aria-hidden="true"><span class="balloon-string"></span></span></button>
+		<button class="side-balloon" type="button" style="--balloon-color:#5272d9;--balloon-top:76vh;--balloon-delay:-.3s;--balloon-speed:2.7s" aria-label="Revienta el globo azul"><span class="balloon-visual" aria-hidden="true"><span class="balloon-string"></span></span></button>
+		<button class="side-balloon right" type="button" style="--balloon-color:#b9d764;--balloon-top:24vh;--balloon-delay:-1.2s;--balloon-speed:3.4s" aria-label="Revienta el globo verde"><span class="balloon-visual" aria-hidden="true"><span class="balloon-string"></span></span></button>
+		<button class="side-balloon right" type="button" style="--balloon-color:#e9c64a;--balloon-top:55vh;--balloon-delay:-2s;--balloon-speed:2.8s" aria-label="Revienta el globo amarillo"><span class="balloon-visual" aria-hidden="true"><span class="balloon-string"></span></span></button>
+		<button class="side-balloon right" type="button" style="--balloon-color:#76bbb0;--balloon-top:83vh;--balloon-delay:-.5s;--balloon-speed:3.2s" aria-label="Revienta el globo turquesa"><span class="balloon-visual" aria-hidden="true"><span class="balloon-string"></span></span></button>
+		<span class="visually-hidden" id="balloon-status" aria-live="polite"></span>
+	</aside>
+	<div class="page">
+		<header>
+			<div class="wordmark">UN DÍA <span>MUY</span> EVELYN</div>
+			<div class="edition">Edición de cumpleaños · hoy</div>
+		</header>
+
+		<main>
+			<section class="copy" aria-labelledby="birthday-title">
+				<p class="eyebrow">El cumpleaños más dulce y un poquito alocado</p>
+				<h1 id="birthday-title">Hoy el mundo tiene un motivo más para brillar: <span class="name">¡Evelyn!</span></h1>
+				<p class="intro">Que tu año venga con planes improvisados, carcajadas y comida deliciosa. Nunca cambies esa energía tuya: un poquito alocada, siempre divertida y lista para otra aventura (sobre todo si hay postre).</p>
+				<aside class="gummy-note" aria-label="Tu regalo de cumpleaños">
+					<span class="candy" aria-hidden="true">🍬</span>
+					<p><strong>Regalo entregado: gomitas</strong>Para endulzarle el día a la más antojada.</p>
+				</aside>
+				<button class="surprise-button" id="surprise" type="button" aria-expanded="false" aria-controls="birthday-message">
+					<span id="button-label">Abrir tu sorpresa</span>
+					<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</button>
+				<div class="message" id="birthday-message" hidden>
+					¡Feliz cumpleaños, Evelyn! Que nunca te falte algo rico para comer, un plan espontáneo que termine en anécdota y alguien con quien compartir tus locuras. Disfruta mucho tus gomitas: ¡hoy no se cuentan!
+					<small>Con muchísimo cariño, para ti</small>
+				</div>
+			</section>
+
+			<figure class="photo-wrap">
+				<img class="photo" src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1100&q=85" alt="Globos y decoración colorida de una fiesta de cumpleaños">
+				<div class="sticker" aria-hidden="true">brilla<br>mucho</div>
+				<figcaption class="photo-caption">Hoy se celebra tu manera de ser <span class="sparkle" aria-hidden="true">✳</span></figcaption>
+			</figure>
+		</main>
+
+		<section class="birthday-challenge" aria-labelledby="challenge-title">
+			<div>
+				<p class="challenge-label">Reto cumpleañero</p>
+				<h2 class="challenge-title" id="challenge-title">La cumpleañera manda.</h2>
+			</div>
+			<p class="challenge-prompt" id="challenge-prompt" aria-live="polite">Hoy puedes empezar por el postre. Las reglas normales están de vacaciones.</p>
+			<button class="surprise-button" id="draw-challenge" type="button">
+				<span>Sortear otro reto</span>
+				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5m-4.1-2a7 7 0 0 1 12-2L20 12M4 12l3.1 4a7 7 0 0 0 12-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			</button>
+		</section>
+
+		<section class="birthday-menu" aria-labelledby="menu-title">
+			<div class="menu-heading">
+				<p class="challenge-label">El menú oficial de Evelyn</p>
+				<h2 class="menu-title" id="menu-title">Hoy el antojo pone las reglas.</h2>
+			</div>
+			<div class="menu-items">
+				<article class="menu-item">
+					<h3>Para empezar</h3>
+					<p>Unas gomitas de bienvenida, cortesía del regalo de hoy.</p>
+				</article>
+				<article class="menu-item">
+					<h3>Plato principal</h3>
+					<p>Su antojo favorito. La cumpleañera elige y nadie cuestiona.</p>
+				</article>
+				<article class="menu-item">
+					<h3>El postre</h3>
+					<p>Algo rico para repetir. Hoy está completamente permitido.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="birthday-wheel" aria-labelledby="wheel-title">
+			<div class="wheel-heading">
+				<p class="challenge-label">Sorteo de cumpleaños</p>
+				<h2 class="wheel-title" id="wheel-title">La ruleta loca de Evelyn</h2>
+			</div>
+			<div class="wheel-content">
+				<div class="combo-slots" aria-live="polite" aria-label="Combo de cumpleaños">
+					<div class="combo-slot"><span>Antojo</span><strong id="combo-food">Una sorpresa rica</strong></div>
+					<div class="combo-slot"><span>Plan</span><strong id="combo-plan">Una aventura improvisada</strong></div>
+					<div class="combo-slot"><span>Título oficial</span><strong id="combo-title">Reina de la fiesta</strong></div>
+				</div>
+				<button class="surprise-button" id="spin-wheel" type="button">
+					<span>Girar la ruleta</span>
+					<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5m-4.1-2a7 7 0 0 1 12-2L20 12M4 12l3.1 4a7 7 0 0 0 12-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</button>
+			</div>
+		</section>
+
+		<footer>
+			<span>Hecho especialmente para Evelyn</span>
+			<span>Que comience tu vuelta al sol <span class="sparkle" aria-hidden="true">✳</span></span>
+		</footer>
+	</div>
+
+	<script>
+		const surpriseButton = document.querySelector("#surprise");
+		const message = document.querySelector("#birthday-message");
+		const buttonLabel = document.querySelector("#button-label");
+		const challengeButton = document.querySelector("#draw-challenge");
+		const challengePrompt = document.querySelector("#challenge-prompt");
+		const wheelButton = document.querySelector("#spin-wheel");
+		const comboSlots = [
+			{ element: document.querySelector("#combo-food"), options: ["Pizza para compartir", "Tacos con extra de todo", "Hamburguesa gigante", "Helado de tu sabor favorito", "Un postre antes de cenar"] },
+			{ element: document.querySelector("#combo-plan"), options: ["Picnic improvisado", "Karaoke sin pena", "Aventura sorpresa", "Maratón de pelis y snacks", "Elegir la música toda la noche"] },
+			{ element: document.querySelector("#combo-title"), options: ["Reina de las gomitas", "Jefa oficial del postre", "Capitana de la fiesta", "Leyenda de los antojos", "La más alocada del año"] }
+		];
+		let previousCombo = "";
+		const balloonStatus = document.querySelector("#balloon-status");
+		const balloons = document.querySelectorAll(".side-balloon");
+		const challenges = [
+			"Misión: probar algo rico que nunca hayas pedido. Hoy toca una aventura con sabor.",
+			"Elige el postre antes que la cena. Esta vez, que la comida espere su turno.",
+			"Declara día libre de planes sensatos: di que sí a una aventura espontánea.",
+			"Pon tus gomitas a buen recaudo... o comparte algunas con tu persona favorita.",
+			"Tu única tarea oficial: comer algo delicioso y reírte hasta que te duela la panza."
+		];
+		let lastChallengeIndex = -1;
+		const colors = ["#f05b78", "#ff9a50", "#5272d9", "#b9d764"];
+
+		wheelButton.addEventListener("click", () => {
+			let selections;
+			let comboKey;
+			do {
+				selections = comboSlots.map(({ options }) => options[Math.floor(Math.random() * options.length)]);
+				comboKey = selections.join("|");
+			} while (comboKey === previousCombo);
+
+			previousCombo = comboKey;
+			comboSlots.forEach(({ element }, index) => {
+				element.classList.remove("is-spinning");
+				void element.offsetWidth;
+				element.textContent = selections[index];
+				element.classList.add("is-spinning");
+			});
+		});
+
+		balloons.forEach((balloon) => {
+			const originalLabel = balloon.getAttribute("aria-label");
+			const color = balloon.style.getPropertyValue("--balloon-color");
+
+			balloon.addEventListener("click", () => {
+				const bounds = balloon.getBoundingClientRect();
+				balloon.classList.add("is-popped");
+				balloon.disabled = true;
+				balloonStatus.textContent = `${originalLabel.replace("Revienta el ", "")} reventado. ¡Puedes volver a darle!`;
+
+				for (let index = 0; index < 9; index += 1) {
+					const piece = document.createElement("span");
+					const angle = (Math.PI * 2 * index) / 9;
+					const distance = 22 + Math.random() * 18;
+					piece.className = "pop-piece";
+					piece.style.left = `${bounds.left + bounds.width / 2}px`;
+					piece.style.top = `${bounds.top + bounds.height / 2}px`;
+					piece.style.setProperty("--piece-color", color);
+					piece.style.setProperty("--piece-x", `${Math.cos(angle) * distance}px`);
+					piece.style.setProperty("--piece-y", `${Math.sin(angle) * distance}px`);
+					document.body.append(piece);
+					piece.addEventListener("animationend", () => piece.remove(), { once: true });
+				}
+
+				setTimeout(() => {
+					balloon.classList.remove("is-popped");
+					balloon.disabled = false;
+					balloon.setAttribute("aria-label", originalLabel);
+				}, 900);
+			});
+		});
+
+		challengeButton.addEventListener("click", () => {
+			let nextChallengeIndex;
+			do {
+				nextChallengeIndex = Math.floor(Math.random() * challenges.length);
+			} while (nextChallengeIndex === lastChallengeIndex);
+
+			lastChallengeIndex = nextChallengeIndex;
+			challengePrompt.textContent = challenges[nextChallengeIndex];
+		});
+
+		surpriseButton.addEventListener("click", () => {
+			const isOpen = surpriseButton.getAttribute("aria-expanded") === "true";
+			surpriseButton.setAttribute("aria-expanded", String(!isOpen));
+			message.hidden = isOpen;
+			buttonLabel.textContent = isOpen ? "Abrir tu sorpresa" : "Cerrar sorpresa";
+
+			if (!isOpen) {
+				for (let index = 0; index < 42; index += 1) {
+					const piece = document.createElement("i");
+					piece.className = "confetti";
+					piece.style.left = `${Math.random() * 100}vw`;
+					piece.style.backgroundColor = colors[index % colors.length];
+					piece.style.animationDelay = `${Math.random() * 0.8}s`;
+					piece.style.transform = `rotate(${Math.random() * 180}deg)`;
+					document.body.append(piece);
+					piece.addEventListener("animationend", () => piece.remove(), { once: true });
+				}
+			}
+		});
+	</script>
+</body>
+</html>
